@@ -1,0 +1,30 @@
+version: 2
+
+updates:
+  - package-ecosystem: npm
+    directories:
+      - /
+      - /tests/ui
+    schedule:
+      interval: weekly
+    open-pull-requests-limit: 3
+    ignore:
+      # Major upgrades are planned work (e.g. Vite 8, React Router 7), not bot PRs.
+      - dependency-name: "*"
+        update-types: ["version-update:semver-major"]
+    groups:
+      npm-minor-patch:
+        update-types: [minor, patch]
+
+  - package-ecosystem: github-actions
+    directory: /
+    schedule:
+      interval: weekly
+    open-pull-requests-limit: 3
+    ignore:
+      # Major upgrades are planned work, not bot PRs.
+      - dependency-name: "*"
+        update-types: ["version-update:semver-major"]
+    groups:
+      actions-minor-patch:
+        update-types: [minor, patch]
